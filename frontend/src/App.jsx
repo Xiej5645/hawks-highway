@@ -4,13 +4,10 @@ import Home from './pages/Home'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <Router> 
     <div className="App">
       <div className="header">
-        <Home />
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
