@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-// import Page from './pages/Page'
+import { useState } from 'react'
+import Home from './pages/Home'
 import './App.css'
 
 function App() {
@@ -9,9 +10,7 @@ function App() {
     <Router> 
     <div className="App">
       <div className="header">
-        <Link to="/"><button className="headerBtn"> Home </button></Link>
-        {/* <Link to="/page"><button className="headerBtn"> Page</button></Link> */}
-
+        <Home />
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
