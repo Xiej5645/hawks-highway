@@ -4,6 +4,59 @@
   padding: 2rem;
   text-align: center;
 }
+/* nav items relative to the right */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  z-index: 1000;
+  padding: 1rem;
+  padding-right: 3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* should be evenly spaced as well */
+.main-nav ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  margin-right: 1rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+
+.main-nav a:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: -8px -12px;
+  color:purple;
+  transition: background 0.5s ease;
+}
+
+.main-nav a.active {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: -8px -12px;
+  color: rgb(85,97,83);
+}
+
+.header {
+  margin-top: 4rem;
+}
 
 .logo {
   height: 6em;

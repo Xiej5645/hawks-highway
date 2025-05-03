@@ -1,0 +1,18 @@
+/* Home page specific styles */
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-content {
+  display: flex;
+  gap: 30px;
+}
+
+/* Add more specific styles as needed */
