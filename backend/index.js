@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import { OAuth2Client } from 'google-auth-library';
+import cors from 'cors';
 
 // testing purpose
 import userRoute from './routes/user.route.js';
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGO)
     .catch(err => console.error('Could not connect to MongoDB', err));
 import User from './models/user.model.js';
 const app = express();
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 const apiLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour window
@@ -133,11 +135,28 @@ app.put('/api/points/:username', async (req, res) => {
     }
 });
 
-// get leaderboard, max 100 users top and sorted by points, if type is daily, weekly, monthly, then only show users with that type
+/*
+get leaderboard, max 100 users top and sorted by points
+if type is daily then sort by dailyPts, weekly then sort by weeklyPts, monthly then sort by monthlyPts
+if type is not daily, weekly, or monthly then sort by totalPts
+return a json object with username and points
+ */
 app.get('/api/leaderboard/:type', async (req, res) => {
     try {
         const { type } = req.params;
-        const users = await User.find({ type }).sort({ points: -1 }).limit(100);
+        let sortField;
+        if (type === 'daily') {
+            sortField = 'dailyPts';
+        } else if (type === 'weekly') {
+            sortField = 'weeklyPts';
+        } else if (type === 'monthly') {
+            sortField = 'monthlyPts';
+        } else if (type ==='total') {
+            sortField ='totalPts';
+        } else {
+            return res.status(400).json({ message: 'Invalid type' });
+        }
+        const users = await User.find({}).sort({ [sortField]: -1 }).limit(100).select('username ' + sortField);
         res.json(users);
     }
     catch (err) {
