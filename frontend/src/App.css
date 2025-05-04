@@ -27,6 +27,14 @@
   padding: 0;
 }
 
+@media (max-width: 768px) {
+  .main-nav ul {
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
 .main-nav li {
   margin-right: 1rem;
 }

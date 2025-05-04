@@ -1,0 +1,33 @@
+.planner-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.planner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.planner-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .planner-container {
+    padding: 1rem;
+  }
+  
+  .planner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-form button {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
