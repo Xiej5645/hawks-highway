@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import './leaderboard.css'
+=======
+import './Leaderboard.css';
+>>>>>>> e9ee5b66f479cb718e0a8a36a6a6781ed14e1290
 
 function Leaderboard() {
 const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
