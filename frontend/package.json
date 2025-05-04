@@ -12,6 +12,7 @@
   },
   "homepage": "https://xiej5645.github.io/hawks-highway/",
   "dependencies": {
+    "@react-google-maps/api": "^2.20.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.3"
