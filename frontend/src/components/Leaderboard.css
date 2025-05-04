@@ -1,29 +1,99 @@
-/* Leaderboard component specific styles */
+/* Futuristic green leaderboard */
 .leaderboard-container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #0d3b1e, #1b5e20);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(22, 163, 74, 0.3);
+  color: #e0f2e9;
+  position: relative;
+  overflow: hidden;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .leaderboard-header {
   text-align: center;
   margin-bottom: 30px;
+  color: #2e7d32;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 15px auto;
 }
 
 .leaderboard-table th,
 .leaderboard-table td {
   padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+  text-align: center;
+  border-bottom: 1px solid #e0f2e9;
+}
+.leaderboard-table td {
+    color:#1b5e20;
 }
 
 .leaderboard-table th {
-  background-color: #f5f5f5;
+  background: linear-gradient(145deg, #1b5e20, #0d3b1e);
+  color: #e0f2e9;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #4caf50;
 }
 
-/* Add more specific styles as needed */
+.leaderboard-table tr:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* Medal styles */
+.medal {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.gold {
+  background: radial-gradient(circle at 30% 30%, #FFD700, #D4AF37);
+}
+
+.silver {
+  background: radial-gradient(circle at 30% 30%, #C0C0C0, #A8A8A8);
+}
+
+.bronze {
+  background: radial-gradient(circle at 30% 30%, #CD7F32, #8C7853);
+}
+
+/* Decorative leaf pattern */
+.leaderboard-container::before {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23c8e6c9"><path d="M12 3c.132 0 .263 0 .393 0C7.746 3 4 6.746 4 11.393c0 2.105.84 4.105 2.343 5.607.253.253.507.507.761.76L12 21l4.896-3.24c.254-.253.508-.507.761-.76C19.16 15.498 20 13.498 20 11.393 20 6.746 16.254 3 11.607 3c-.13 0-.261 0-.393 0h0zM2 11.393C2 5.643 5.643 2 11.393 2c.13 0 .261 0 .393 0h.393C17.357 2 21 5.643 21 11.393c0 2.794-1.12 5.45-3.122 7.453l-5.24 3.494a1 1 0 01-1.276 0l-5.24-3.494C3.12 16.843 2 14.187 2 11.393zM7.5 11a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm9 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg>');
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  top: -30px;
+  right: -30px;
+  pointer-events: none;
+}
