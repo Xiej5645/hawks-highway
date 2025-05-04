@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Leaderboard.css';
+import { VITE_SUPA } from '../config.jsx';
 
 function Leaderboard() {
 const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
@@ -12,7 +13,7 @@ const [selectedPoints, setSelectedPoints] = useState('totalpts');
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_SUPA}&select=id,username,totalpts,dailypts,weeklypts,monthlypts`);
+        const response = await fetch(`${VITE_SUPA}&select=id,username,totalpts,dailypts,weeklypts,monthlypts`);
         const data = await response.json();
         const mockData = [
           { id: 1, username: 'User1', totalpts: 100, dailypts:10, weeklypts: 10, monthlypts: 100 },
@@ -26,7 +27,9 @@ const [selectedPoints, setSelectedPoints] = useState('totalpts');
           { id: 9, username: 'User9', totalpts: 60, dailypts:14, weeklypts: 40, monthlypts: 50 },
           { id: 10, username: 'User10', totalpts: 55, dailypts:6, weeklypts: 45, monthlypts: 45 }
         ];
-        const mergedData = [...data, ...mockData];
+        let mergedData; 
+        if (data) mergedData = [...data, ...mockData];
+        else mergedData = mockData;
         const sortedData = mergedData.sort((a, b) => parseInt(b[selectedPoints]) - parseInt(a[selectedPoints])).map(user => ({...user, totalpts: parseInt(user.totalpts), dailypts: parseInt(user.dailypts), weeklypts: parseInt(user.weeklypts), monthlypts: parseInt(user.monthlypts)}));
         setUsers(sortedData);
         setLoading(false);

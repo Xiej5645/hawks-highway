@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { VITE_SUPA } from '../config.jsx';
 import './LoginSignup.css';
 
 function LoginSignup() {
@@ -34,7 +35,7 @@ function LoginSignup() {
             setError('Username and password are required');
             return false;
         }
-        const url = import.meta.env.VITE_SUPA; 
+        const url = VITE_SUPA; 
         try {
             // try post
             const hash = await fetch(`https://api.hashify.net/hash/md4/hex?value=${formData.password}`);
@@ -72,7 +73,7 @@ function LoginSignup() {
             const hashedPassword = hashData.Digest;
             console.log(hashedPassword);
 
-            const res = await fetch(`${import.meta.env.VITE_SUPA}&select=email,password&email=eq.${formData.email}`).then(res => res.json());
+            const res = await fetch(`${VITE_SUPA}&select=email,password&email=eq.${formData.email}`).then(res => res.json());
             // res is a list of users
             if (!res || res.length === 0) {
                 setError('User not found');
