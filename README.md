@@ -4,7 +4,7 @@
 Hawks' Highway is an Eco-friendly travel planner, inspired by the need to address carbon emissions and promoting sustainable travel habits. It is designed for every day commuters and offers a gamified approach to reducing carbon emissions.
 
 ## About us
-We are a team of 4 students from Hunter college, first or second time attending a hackathon event. We live traveling, and we have a passion for sustainability. We are excited to bring this project to life. Features are still very limited, due to time constraints.
+We are a team of 4 students from Hunter college, first or second time attending a hackathon event. We love traveling, and we have a passion for sustainability. We are excited to bring this project to life. Features are still very limited, due to time constraints.
 
 ## Purpose
 This project aims to:
