@@ -8,7 +8,7 @@ function Planner() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentTrip, setCurrentTrip] = useState(null);
 
-  const GOOGLE_API_KEY = VITE_GOOGLE_MAPS_API_KEY || import.meta.VITE_GOOGLE_MAPS_API_KEY || VITE_GOOGLE_API_KEY || import.meta.VITE_GOOGLE_API_KEY || '(hidden)'; // Replace with your real key
+  const GOOGLE_API_KEY =  import.meta.VITE_GOOGLE_MAPS_API_KEY  || import.meta.VITE_GOOGLE_API_KEY || '(hidden)'; // Replace with your real key
 
 
   const geocodeAddress = async (address) => {
