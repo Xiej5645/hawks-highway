@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './Leaderboard.css';
 
 function Leaderboard() {
   const [users, setUsers] = useState([]);

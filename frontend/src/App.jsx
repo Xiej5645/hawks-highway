@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState } from 'react';
 import Home from './pages/Home';
 import LoginSignup from './components/LoginSignup';
 import Leaderboard from './components/Leaderboard';
@@ -8,6 +8,9 @@ import Navigation from './components/Navigation';
 import './App.css'
 
 function App() {
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
+  const [coordinates, setCoordinates] = useState({ origin: null, destination: null });
   return (
     <Router> 
     <div className="App">
