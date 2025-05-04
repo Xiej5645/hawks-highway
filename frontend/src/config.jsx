@@ -4,6 +4,8 @@ const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
 
 // Users API endpoint
 const USERS_ENDPOINT = '/rest/v1/users';
+const VITE_ENDPOINT = '/rest/v1/token';
 
 // Combined Supabase API configuration
 export const VITE_SUPA = `${SUPABASE_URL}${USERS_ENDPOINT}?apikey=${SUPABASE_API_KEY}`;
+export const VURL = `${SUPABASE_URL}${VITE_ENDPOINT}?apikey=${SUPABASE_API_KEY}`;

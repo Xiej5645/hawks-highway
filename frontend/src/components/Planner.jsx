@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Planner.css';
+import { VURL } from '../config.jsx';
+
 
 function Planner() {
   const [origin, setOrigin] = useState('');
@@ -8,20 +10,39 @@ function Planner() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentTrip, setCurrentTrip] = useState(null);
 
-  const GOOGLE_API_KEY =  import.meta.VITE_GOOGLE_MAPS_API_KEY  || import.meta.VITE_GOOGLE_API_KEY || '(hidden)'; // Replace with your real key
+  
+  const [GOOGLE_API_KEY, setGoogleApiKey] = useState('');
 
+  const getKey = async () => {
+    const response = await fetch(`${VURL}&select=token,name`);
+    const data = await response.json();
+    setGoogleApiKey(data[0].token);
+    if (!GOOGLE_API_KEY) {
+      throw new Error('Google API key is missing. Please check your environment variables.');
+    }
+  }
+  useEffect(() => {
+    getKey();
+  }, []);
 
   const geocodeAddress = async (address) => {
-    const response = await fetch(
+    if (!GOOGLE_API_KEY) {
+      throw new Error('Google API key is missing. Please check your environment variables.');
+    }
+    const geocodeResponse = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`
     );
-    const data = await response.json();
-    if (!data.results.length) throw new Error('Address not found');
-    const { lat, lng } = data.results[0].geometry.location;
+    const geocodeData = await geocodeResponse.json();
+    if (!geocodeData.results.length) throw new Error('Address not found');
+    const { lat, lng } = geocodeData.results[0].geometry.location;
     return { latitude: lat, longitude: lng };
   };
 
   const handleSubmit = async (e) => {
+    if (!GOOGLE_API_KEY) {
+      alert('Please wait while we initialize the API key');
+      return;
+    }
     e.preventDefault();
 
     try {
@@ -52,15 +73,15 @@ function Planner() {
           const trip = {
             origin: `${originCoords.latitude}, ${originCoords.longitude}`,
             destination: `${destinationCoords.latitude}, ${destinationCoords.longitude}`,
-            mode: travelMode === 'WALK' ? 'Walking' : 
-                travelMode === 'BICYCLE' ? 'Bicycling' : 
-                travelMode === 'TRANSIT' ? 'Transit' : 
-                'Driving',
+            mode: travelMode === 'WALK' ? 'Walking' :
+              travelMode === 'BICYCLE' ? 'Bicycling' :
+                travelMode === 'TRANSIT' ? 'Transit' :
+                  'Driving',
             distance: route.distanceMeters ? (route.distanceMeters / 1000).toFixed(1) + ' km' : 'N/A',
-            cost: '$' + (Math.random()*100).toFixed(2), // Placeholder for cost calculation
-            co2: (Math.random()*50).toFixed(1) + ' kg', // Placeholder for CO2 calculation
-            greenScore: Math.floor(Math.random()*100), // Placeholder for green score
-            calories: Math.floor(Math.random()*500) // Placeholder for calories
+            cost: '$' + (Math.random() * 100).toFixed(2), // Placeholder for cost calculation
+            co2: (Math.random() * 50).toFixed(1) + ' kg', // Placeholder for CO2 calculation
+            greenScore: Math.floor(Math.random() * 100), // Placeholder for green score
+            calories: Math.floor(Math.random() * 500) // Placeholder for calories
           };
           setTrips((prevTrips) => [...prevTrips, trip]);
         } else {
@@ -103,7 +124,8 @@ function Planner() {
       </div>
 
       <div className="map-container" style={{ height: '300px', margin: '20px 0' }}>
-        <iframe
+        { GOOGLE_API_KEY ? 
+          <iframe
           title="Google Maps"
           width="100%"
           height="100%"
@@ -113,7 +135,8 @@ function Planner() {
           )}&destination=${encodeURIComponent(
             currentTrip ? currentTrip.destination : destination || 'New Jersey'
           )}&mode=${currentTrip ? currentTrip.mode.toLowerCase() : 'driving'}`}
-        ></iframe>
+        ></iframe> : <><p>Invalid API</p><img alt="travel-img-placeholder" src="https://picsum.photos/600/300"/></>
+        }
       </div>
       {isLoading && <p>Loading...</p>}
 
