@@ -1,0 +1,84 @@
+.planner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.trip-form {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.trip-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.trip-form input,
+.trip-form select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.trip-form button {
+  grid-column: span 2;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.map-placeholder {
+  margin-bottom: 20px;
+}
+
+.map-placeholder img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.trip-recommendations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.trip-recommendations h3 {
+  grid-column: 1 / -1;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.trip-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-3px);
+}
+
+.trip-card p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.trip-card p:first-child {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.trip-card p:last-child {
+  margin-bottom: 0;
+}
