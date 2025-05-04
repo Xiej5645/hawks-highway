@@ -40,3 +40,11 @@ npm run dev
 ```
 4. Navigate to the localhost url, port 5173 or 5174
 
+## Note:
+- The backend folder from this repo is not being used.
+  It worked from localhost but couldn't get it to work on vercel.
+
+  backend folder tech-stack:Node.js, Express, MongoDB, Google auth
+- Spent too much time trying to figure it out, but in the end we went with Supabase.  
+- Frontend tech-stack: Reactjs, ReactRouter, Vite.
+
