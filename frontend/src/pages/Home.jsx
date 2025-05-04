@@ -1,11 +1,18 @@
 import './Home.css'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext';
+import { useContext } from 'react';
 
 export default function Home() {
-  const navigate = useNavigate()
+    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+    const navigate = useNavigate()
   return (
     <div className="home-container">
-      <h1 id='home-title'>Welcome to Hawks Highway</h1>
+        {isLoggedIn ? (
+        <h1 id='home-title'>Thanks for joining us!</h1>
+      ) : (
+        <h1 id='home-title'>Welcome to Hawks Highway</h1>
+      )}
       <div className="both-sections">
 
         <div className="hero-column hero-section">
@@ -15,16 +22,17 @@ export default function Home() {
           </p>
 
           <button className="cta-button" onClick={() => navigate('/planner')}>Start Your Greener Journey!</button>
+          {isLoggedIn && <button className="cta-button" onClick={() => navigate('/leaderboard')}>Check out your stats!</button>}
         </div>
       </div>
       <div className="mission-column mission-section">
-          <h2>Our Mission</h2>
-          <p>
-            At Hawk's Highway, we're committed to reducing carbon footprints through
-            intelligent, eco-conscious travel planning. Join us in creating a greener
-            planet, one trip at a time.
-          </p>
-        </div>
+        <h2>Our Mission</h2>
+        <p>
+          At Hawk's Highway, we're committed to reducing carbon footprints through
+          intelligent, eco-conscious travel planning. Join us in creating a greener
+          planet, one trip at a time.
+        </p>
+      </div>
       <div className="features-section">
         <div className="feature">
           <h3>Eco-Friendly Routes</h3>

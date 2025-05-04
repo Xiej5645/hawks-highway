@@ -10,7 +10,7 @@ function LoginSignup() {
   useEffect(() => {
     if (isLoggedIn) {
       localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = '/leaderboard';
+      window.location.href = '/';
     }
   }, [isLoggedIn]);
     const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ function LoginSignup() {
     
     useEffect(() => {
         if (isLoggedIn) {
-            window.location.href = '/leaderboard';
+            window.location.href = '/';
         }        
     }, [isLoggedIn])
 
