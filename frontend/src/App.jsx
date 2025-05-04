@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useState } from 'react'
+import { AuthProvider } from './contexts/AuthContext';
 import Home from './pages/Home';
 import LoginSignup from './components/LoginSignup';
 import Leaderboard from './components/Leaderboard';
@@ -9,8 +10,9 @@ import './App.css'
 
 function App() {
   return (
-    <Router> 
-    <div className="App">
+    <AuthProvider>
+      <Router> 
+      <div className="App">
       <div className="header">
         <Navigation />
       </div>
@@ -21,7 +23,8 @@ function App() {
         <Route path="/planner" element={<Planner />} />
       </Routes>
     </div>
-  </Router>
+      </Router>
+    </AuthProvider>
   )
 }
 
