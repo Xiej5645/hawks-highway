@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import './Planner.css';
-import { VURL } from '../config.jsx';
 
 
 function Planner() {
@@ -14,12 +13,7 @@ function Planner() {
   const [GOOGLE_API_KEY, setGoogleApiKey] = useState('');
 
   const getKey = async () => {
-    const response = await fetch(`${VURL}&select=token,name`);
-    const data = await response.json();
-    setGoogleApiKey(data[0].token);
-    if (!GOOGLE_API_KEY) {
-      throw new Error('Google API key is missing. Please check your environment variables.');
-    }
+    setGoogleApiKey(''); // set your own key here
   }
   useEffect(() => {
     getKey();
@@ -135,7 +129,7 @@ function Planner() {
           )}&destination=${encodeURIComponent(
             currentTrip ? currentTrip.destination : destination || 'New Jersey'
           )}&mode=${currentTrip ? currentTrip.mode.toLowerCase() : 'driving'}`}
-        ></iframe> : <><p>Invalid API</p><img alt="travel-img-placeholder" src="https://picsum.photos/600/300"/></>
+        ></iframe> : <><p>Cannot connect to API</p><img alt="travel-img-placeholder" src="https://picsum.photos/600/300"/></>
         }
       </div>
       {isLoading && <p>Loading...</p>}

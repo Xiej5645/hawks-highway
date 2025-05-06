@@ -1,29 +1,29 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
-import { VITE_SUPA } from '../config.jsx';
+// import { VITE_SUPA } from '../config.jsx';
 import './LoginSignup.css';
 
 function LoginSignup() {
     const [isLogin, setIsLogin] = useState(true);
     const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = '/';
-    }
-  }, [isLoggedIn]);
+    useEffect(() => {
+        if (isLoggedIn) {
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = '/';
+        }
+    }, [isLoggedIn]);
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: ''
     });
     const [error, setError] = useState(null);
-    
+
     useEffect(() => {
         if (isLoggedIn) {
             window.location.href = '/';
-        }        
+        }
     }, [isLoggedIn])
 
     const handleChange = (e) => {
@@ -35,7 +35,7 @@ function LoginSignup() {
             setError('Username and password are required');
             return false;
         }
-        const url = VITE_SUPA; 
+        // const url = VITE_SUPA; 
         try {
             // try post
             const hash = await fetch(`https://api.hashify.net/hash/md4/hex?value=${formData.password}`);
@@ -44,20 +44,26 @@ function LoginSignup() {
             const newFormData = {
                 username: formData.username,
                 email: formData.email,
-                password: hashedPassword
+                password: hashedPassword,
+                totalpts: 0,
+                dailypts: 0,
+                weeklypts: 0,
+                monthlypts: 0,
+                tripsInfo:[]
             }
-            const response = await fetch(`${url}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newFormData),
-            })
-            if (response.status == 409) {
-                setError('Username or email already exists');
-                return false;
-            }
-            // console.log(response.status);
+            // const response = await fetch(`${url}`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(newFormData),
+            // })
+            // if (response.status == 409) {
+            //     setError('Username or email already exists');
+            //     return false;
+            // }
+
+            localStorage.setItem('userData', JSON.stringify(newFormData));
             return true;
         }
         catch (error) {
@@ -72,18 +78,24 @@ function LoginSignup() {
             const hashData = await hash.json();
             const hashedPassword = hashData.Digest;
             console.log(hashedPassword);
+            // const res = await fetch(`${VITE_SUPA}&select=email,password&email=eq.${formData.email}`).then(res => res.json());
+            // if (!res || res.length === 0) {
+            //     setError('User not found');
+            //     return false;
+            // }
 
-            const res = await fetch(`${VITE_SUPA}&select=email,password&email=eq.${formData.email}`).then(res => res.json());
-            // res is a list of users
-            if (!res || res.length === 0) {
-                setError('User not found');
-                return false;
-            }
+            // if (res[0].password === hashedPassword) {
+            //     return true;
+            // }            
+
+            // check if user exists in local storage
+            const email = JSON.parse(localStorage.getItem('userData')).email;
+            const password = JSON.parse(localStorage.getItem('userData')).password;
             
-            if (res[0].password === hashedPassword) {
+            if (email === formData.email && password === hashedPassword) {
                 return true;
-            }            
-            if (error) throw error;
+            }
+            else if (error) throw error;
             return false;
         } catch (error) {
             setError(error.message);
@@ -94,14 +106,13 @@ function LoginSignup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-        console.log(formData);
         // testing: create a new user
         if (isLogin) {
             if (await handleValidate()) {
                 console.log('user validated');
                 setIsLoggedIn(true);
             }
-        } else{
+        } else {
             if (await handleNewUser()) {
                 console.log('new user created');
                 setIsLoggedIn(true);

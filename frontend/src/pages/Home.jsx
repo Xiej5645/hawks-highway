@@ -23,6 +23,7 @@ export default function Home() {
 
           <button className="cta-button" onClick={() => navigate('/planner')}>Start Your Greener Journey!</button>
           {isLoggedIn && <button className="cta-button" onClick={() => navigate('/leaderboard')}>Check out your stats!</button>}
+          {isLoggedIn && <button className="cta-button" onClick={() => setIsLoggedIn(false)}>log out</button>}
         </div>
       </div>
       <div className="mission-column mission-section">
