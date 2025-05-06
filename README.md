@@ -1,4 +1,6 @@
-# The (Hunter) Hawks' Highway
+# The (Hunter) Hawks' Highway [has been archived]
+- This project is no longer being actively maintained.
+- This project is part of the 48 hours 2025 Hunter Hacks Hackathon. 
 
 ## Inspiration
 Hawks' Highway is an Eco-friendly travel planner, inspired by the need to address carbon emissions and promoting sustainable travel habits. It is designed for every day commuters and offers a gamified approach to reducing carbon emissions.
@@ -48,3 +50,6 @@ npm run dev
 - Spent too much time trying to figure it out, but in the end we went with Supabase.  
 - Frontend tech-stack: Reactjs, ReactRouter, Vite.
 
+- last update: 05/05/2025: 
+  - removed backend api, previously using Supabase  
+  - it is now a fully static site
